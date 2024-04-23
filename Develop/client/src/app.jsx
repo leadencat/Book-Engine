@@ -1,25 +1,24 @@
-import './app.css';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import {
-    ApolloClient,
-    InMemoryCache,
-    ApolloProvider, 
-    createHttpLink,
-  } from "@apollo/client";
-  import { setContext } from "@apollo/client/link/context";
 
 import Navbar from './components/Navbar';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
 function App() {
   return (
+    <Router>
     <>
       <Navbar />
-      <Outlet />
+      <Switch>
+        <Route exact path='/' components= {SavedBooks} />
+        <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+      </Switch>
     </>
+    </Router>
   );
 }
 
